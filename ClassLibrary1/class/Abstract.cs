@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Calculator;
-abstract class Calc
+ public abstract class Calc
 {
     public double Result { get; protected set; }
 }

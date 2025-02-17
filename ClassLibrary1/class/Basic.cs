@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Calculator.IOperation;
 
 namespace Calculator.Basic;
-internal class BasicCalculator:Calc, IOperations
+public class BasicCalculator:Calc, IOperationing
 {
     public void Add(double number)
     {

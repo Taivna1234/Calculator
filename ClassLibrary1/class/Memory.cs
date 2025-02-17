@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Calculator.Memory;
- internal class MemoryItem
+ public class MemoryItem
 {
     public double Value { get; }
     public DateTime Timestamp { get; }

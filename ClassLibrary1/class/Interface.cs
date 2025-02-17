@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Calculator.Basic;
 
 namespace Calculator.IOperation;
-internal interface IOperation
+public interface IOperationing
 {
     void Add(double number);
     void Subtract(double number);
