@@ -36,6 +36,8 @@ namespace TestProject1
                 Assert.AreEqual(2, items.Count);
                 Assert.AreEqual(10, items[0].Value);
                 Assert.AreEqual(6, items[1].Value);
+                memory.PrintMemory();
+                memory.Clear();
             }
         }
     }
