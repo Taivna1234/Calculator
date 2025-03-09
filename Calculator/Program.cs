@@ -1,6 +1,6 @@
 ﻿using System;
-using Calculator.Basic;
-using CustomCalculator;
+using Calculator;
+using Calculator.Memory;
 class Programm
 {
     static void Main()
@@ -16,6 +16,5 @@ class Programm
         Console.WriteLine($"Result after subtraction: {calc.Result}");
         memory.Save(calc.Result);
 
-        memory.PrintMemory();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
-using Calculator.Basic;
-using CustomCalculator;
+using Calculator;
+using Calculator.Memory;
 
 namespace TestProject1
 {
@@ -13,6 +13,7 @@ namespace TestProject1
             public void TestAddition()
             {
                 BasicCalculator calc = new BasicCalculator();
+
                 calc.Add(10);
                 Assert.AreEqual(10, calc.Result);
             }
@@ -36,7 +37,6 @@ namespace TestProject1
                 Assert.AreEqual(2, items.Count);
                 Assert.AreEqual(10, items[0].Value);
                 Assert.AreEqual(6, items[1].Value);
-                memory.PrintMemory();
                 memory.Clear();
             }
         }

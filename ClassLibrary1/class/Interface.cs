@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Calculator.Basic;
+using Calculator;
 
-namespace Calculator.IOperation;
+namespace Calculator;
 public interface IOperationing
 {
     void Add(double number);

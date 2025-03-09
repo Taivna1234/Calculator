@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Calculator;
 
 namespace Calculator.Memory;
  public class MemoryItem
@@ -15,4 +16,5 @@ namespace Calculator.Memory;
         Value = value;
         Timestamp = DateTime.Now;
     }
+
 }

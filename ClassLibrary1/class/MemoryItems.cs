@@ -4,31 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Calculator.Memory;
+using Calculator;
 
-namespace CustomCalculator
+namespace Calculator.Memory
 {
     public class Memori
-{
-    private List<MemoryItem> memoryItems = new List<MemoryItem>();
-
-    public void Save(double value)
     {
-        memoryItems.Add(new MemoryItem(value));
-    }
+        private List<MemoryItem> memoryItems = new List<MemoryItem>();
 
-    public void Clear()
-    {
-        memoryItems.Clear();
-    }
-
-    public void PrintMemory()
-    {
-        Console.WriteLine("Memory:");
-        foreach (var item in memoryItems)
+        public void Save(double value)
         {
-            Console.WriteLine($"Value: {item.Value}, Saved at: {item.Timestamp}");
+            memoryItems.Add(new MemoryItem(value));
         }
-    }
+
+        public void Clear()
+        {
+            memoryItems.Clear();
+        }
+
         public List<MemoryItem> GetMemoryItems()
         {
             return memoryItems;

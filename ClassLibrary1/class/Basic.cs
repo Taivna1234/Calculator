@@ -3,18 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Calculator.IOperation;
+using Calculator;
+using Calculator.Memory;
 
-namespace Calculator.Basic;
-public class BasicCalculator:Calc, IOperationing
+namespace Calculator
 {
-    public void Add(double number)
+    public class BasicCalculator : Calc, IOperationing
     {
-        Result += number;
-    }
+        private Memori memory;
 
-    public void Subtract(double number)
-    {
-        Result -= number;
+        public BasicCalculator(Memori mem)
+        {
+            memory = mem;
+        }
+
+        public void Add(double number)
+        {
+            Result += number;
+            memory.Save(Result); 
+        }
+
+        public void Subtract(double number)
+        {
+            Result -= number;
+            memory.Save(Result); 
+        }
     }
 }
