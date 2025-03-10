@@ -73,7 +73,7 @@
             grpMemory.TabIndex = 1;
             grpMemory.TabStop = false;
             grpMemory.Text = "Memory";
-            grpMemory.Enter += grpMemory_Enter;
+            
             // 
             // lblMemoryLast
             // 

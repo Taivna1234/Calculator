@@ -11,6 +11,7 @@ namespace Calculator
     public class BasicCalculator : Calc, IOperationing
     {
         private Memori memory;
+        public Double Result;
 
         public BasicCalculator() : base()
         {
@@ -24,6 +25,7 @@ namespace Calculator
 
         public void Add(double number)
         {
+     
             Result += number;
             memory.Save(Result); 
         }

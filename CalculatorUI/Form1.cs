@@ -9,6 +9,7 @@ namespace CalculatorUI
     {
         private BasicCalculator calc;
         private Memori memory;
+        private string currentOperation = "";
 
         public Form1()
         {
@@ -22,7 +23,7 @@ namespace CalculatorUI
 
         }
 
-        private void UpdateMemoryDisplay()
+        public void UpdateMemoryDisplay()
         {
             double? lastMemory = memory.GetLastMemory();
             lblMemoryLast.Text = lastMemory.HasValue ? lastMemory.ToString() : "No memory";
@@ -36,19 +37,35 @@ namespace CalculatorUI
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            calc.Add(double.Parse(lblDisplay.Text));
-            lblDisplay.Text = calc.Result.ToString();
+            calc.Result = Double.Parse(lblDisplay.Text);
+            lblDisplay.Text = ""; 
+            currentOperation = "add";
         }
 
         private void btnSubtract_Click(object sender, EventArgs e)
         {
-            calc.Subtract(double.Parse(lblDisplay.Text));
-            lblDisplay.Text = calc.Result.ToString();
+            calc.Result = Double.Parse(lblDisplay.Text);
+            lblDisplay.Text = ""; 
+            currentOperation = "subtract";
         }
 
         private void btnEquals_Click(object sender, EventArgs e)
         {
-            lblDisplay.Text = calc.Result.ToString();
+            
+
+                if (currentOperation == "add")
+                {
+                    calc.Add(double.Parse(lblDisplay.Text));
+                }
+                else if (currentOperation == "subtract")
+                {
+                    calc.Subtract(double.Parse(lblDisplay.Text));
+                }
+                lblDisplay.Text = calc.Result.ToString();
+                currentOperation = "";
+                UpdateMemoryDisplay();
+            
+            
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -65,13 +82,37 @@ namespace CalculatorUI
 
         private void btnMemoryAdd_Click(object sender, EventArgs e)
         {
-            memory.Save(calc.Result + double.Parse(lblDisplay.Text));
+            double? lastMemoryValue = memory.GetLastMemory();
+
+            if (lastMemoryValue.HasValue)
+            {
+                double newMemoryValue = lastMemoryValue.Value + double.Parse(lblDisplay.Text);
+
+                memory.Save(newMemoryValue);
+            }
+            else
+            {
+                memory.Save(double.Parse(lblDisplay.Text));
+            }
+
             UpdateMemoryDisplay();
         }
 
         private void btnMemorySubtract_Click(object sender, EventArgs e)
         {
-            memory.Save(calc.Result - double.Parse(lblDisplay.Text));
+            double? lastMemoryValue = memory.GetLastMemory();
+
+            if (lastMemoryValue.HasValue)
+            {
+                double newMemoryValue = lastMemoryValue.Value - double.Parse(lblDisplay.Text);
+
+                memory.Save(newMemoryValue);
+            }
+            else
+            {
+                memory.Save(double.Parse(lblDisplay.Text));
+            }
+
             UpdateMemoryDisplay();
         }
 
