@@ -12,6 +12,11 @@ namespace Calculator
     {
         private Memori memory;
 
+        public BasicCalculator()
+        {
+
+        }
+
         public BasicCalculator(Memori mem)
         {
             memory = mem;
