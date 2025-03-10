@@ -12,7 +12,7 @@ namespace Calculator
     {
         private Memori memory;
 
-        public BasicCalculator()
+        public BasicCalculator() : base()
         {
 
         }

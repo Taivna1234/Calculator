@@ -30,6 +30,7 @@
         {
             lblDisplay = new Label();
             grpMemory = new GroupBox();
+            lblMemoryLast = new Label();
             btnMemoryAdd = new Button();
             btnMemorySubstract = new Button();
             btn0 = new Button();
@@ -60,18 +61,29 @@
             lblDisplay.Size = new Size(2, 39);
             lblDisplay.TabIndex = 0;
             lblDisplay.TextAlign = ContentAlignment.MiddleRight;
-            lblDisplay.Click += label1_Click;
             // 
             // grpMemory
             // 
+            grpMemory.Controls.Add(lblMemoryLast);
             grpMemory.Controls.Add(btnMemoryAdd);
             grpMemory.Controls.Add(btnMemorySubstract);
-            grpMemory.Location = new Point(529, 51);
+            grpMemory.Location = new Point(504, 41);
             grpMemory.Name = "grpMemory";
-            grpMemory.Size = new Size(200, 100);
+            grpMemory.Size = new Size(269, 100);
             grpMemory.TabIndex = 1;
             grpMemory.TabStop = false;
             grpMemory.Text = "Memory";
+            grpMemory.Enter += grpMemory_Enter;
+            // 
+            // lblMemoryLast
+            // 
+            lblMemoryLast.AutoSize = true;
+            lblMemoryLast.Font = new Font("Segoe UI", 12F);
+            lblMemoryLast.Location = new Point(6, 53);
+            lblMemoryLast.Name = "lblMemoryLast";
+            lblMemoryLast.Size = new Size(94, 21);
+            lblMemoryLast.TabIndex = 18;
+            lblMemoryLast.Text = "No memory";
             // 
             // btnMemoryAdd
             // 
@@ -270,6 +282,7 @@
             Text = "Calculator";
             Load += Form1_Load;
             grpMemory.ResumeLayout(false);
+            grpMemory.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -295,5 +308,6 @@
         private Button btnMemoryAdd;
         private Button btnMemorySubstract;
         private Button btnMemorySave;
+        private Label lblMemoryLast;
     }
 }

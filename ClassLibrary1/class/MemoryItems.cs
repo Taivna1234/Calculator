@@ -26,6 +26,14 @@ namespace Calculator.Memory
         {
             return memoryItems;
         }
+        public double? GetLastMemory()
+        {
+            if (memoryItems.Count > 0)
+            {
+                return memoryItems.Last().Value; 
+            }
+            return null; 
+        }
 
     }
 }
