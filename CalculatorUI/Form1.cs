@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Calculator;
 using Calculator.Memory;
@@ -10,6 +11,7 @@ namespace CalculatorUI
         private BasicCalculator calc;
         private Memori memory;
         private string currentOperation = "";
+        private double LastMemoryItem;
 
         public Form1()
         {
@@ -68,6 +70,7 @@ namespace CalculatorUI
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+           double? LastMemoryItem = memory.GetLastMemory();
             lblDisplay.Text = "";
             calc = new BasicCalculator(new Memori());
         }
@@ -76,14 +79,32 @@ namespace CalculatorUI
         {
             double? lastMemoryValue = memory.GetLastMemory();
 
-            if (lastMemoryValue.HasValue && calc.Result == lastMemoryValue.Value)
+            // If there is a last memory value
+            if (lastMemoryValue.HasValue)
             {
-                memory.Save(double.Parse(lblDisplay.Text));
+                // If the current result is equal to the last memory value
+                if (calc.Result == lastMemoryValue.Value)
+                {
+                    memory.Save(double.Parse(lblDisplay.Text));
+                }
+                else
+                {
+                    memory.Save(calc.Result);
+                }
             }
             else
             {
-                memory.Save(calc.Result);
+
+                if (calc.Result == LastMemoryItem)
+                {
+                    memory.Save(double.Parse(lblDisplay.Text));
+                }
+                else
+                {
+                    memory.Save(calc.Result);
+                }
             }
+
             UpdateMemoryDisplay();
         }
 
