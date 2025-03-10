@@ -19,12 +19,12 @@ namespace CalculatorUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Initialization code can go here if needed
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-            // You can implement any functionality for the label click if needed
+            
         }
 
         private void btnNumber_Click(object sender, EventArgs e)
