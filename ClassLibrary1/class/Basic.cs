@@ -11,11 +11,11 @@ namespace Calculator
     public class BasicCalculator : Calc, IOperationing
     {
         private Memori memory;
-        public Double Result;
+        public new Double Result;
 
         public BasicCalculator() : base()
         {
-
+            memory = new Memori();
         }
 
         public BasicCalculator(Memori mem)
