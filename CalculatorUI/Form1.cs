@@ -63,9 +63,7 @@ namespace CalculatorUI
                 }
                 lblDisplay.Text = calc.Result.ToString();
                 currentOperation = "";
-                UpdateMemoryDisplay();
-            
-            
+                        
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -76,7 +74,16 @@ namespace CalculatorUI
 
         private void btnMemorySave_Click(object sender, EventArgs e)
         {
-            memory.Save(calc.Result);
+            double? lastMemoryValue = memory.GetLastMemory();
+
+            if (lastMemoryValue.HasValue && calc.Result == lastMemoryValue.Value)
+            {
+                memory.Save(double.Parse(lblDisplay.Text));
+            }
+            else
+            {
+                memory.Save(calc.Result);
+            }
             UpdateMemoryDisplay();
         }
 
