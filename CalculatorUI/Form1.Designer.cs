@@ -59,6 +59,7 @@
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             Name1 = new Button();
             titlebtn = new Button();
+            removebtn = new Button();
             grpMemory.SuspendLayout();
             contextMenuStrip3.SuspendLayout();
             SuspendLayout();
@@ -349,12 +350,23 @@
             titlebtn.UseVisualStyleBackColor = true;
             titlebtn.Click += button4_Click;
             // 
+            // removebtn
+            // 
+            removebtn.Location = new Point(298, 230);
+            removebtn.Name = "removebtn";
+            removebtn.Size = new Size(92, 40);
+            removebtn.TabIndex = 22;
+            removebtn.Text = "🔙";
+            removebtn.UseVisualStyleBackColor = true;
+            removebtn.Click += Remove;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
             ClientSize = new Size(808, 450);
+            Controls.Add(removebtn);
             Controls.Add(titlebtn);
             Controls.Add(Name1);
             Controls.Add(button3);
@@ -419,5 +431,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Button Name1;
         private Button titlebtn;
+        private Button removebtn;
     }
 }

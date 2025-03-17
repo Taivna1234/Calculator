@@ -45,10 +45,10 @@ namespace CalculatorUI
             {
                 var g = e.Graphics;
                 var rect = titlebtn.ClientRectangle;
-                rect.Inflate(-1, -1);  
+                rect.Inflate(-1, -1);
 
                 // Draw the violet bottom border
-                using (var pen = new Pen(Color.Violet, 2))  
+                using (var pen = new Pen(Color.Violet, 2))
                 {
                     g.DrawLine(pen, rect.Left, rect.Bottom - 1, rect.Right, rect.Bottom - 1);
                 }
@@ -132,6 +132,15 @@ namespace CalculatorUI
 
         private void button4_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void Remove(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(lblDisplay.Text))
+            {
+                lblDisplay.Text = lblDisplay.Text.Substring(0, lblDisplay.Text.Length - 1);
+            }
 
         }
     }
