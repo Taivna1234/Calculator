@@ -3,12 +3,19 @@ using Calculator;
 using Calculator.Memory;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace TestProject1
 {
+    /// <summary>
+    /// BasicCalculator-ийн нэгжийн тестүүдийг агуулсан класс.
+    /// </summary>
     [TestClass]
     public sealed class Test1
     {
+        /// <summary>
+        /// Нэмэх үйлдлийг шалгах тест.
+        /// </summary>
         [TestMethod]
         public void TestAddition()
         {
@@ -17,6 +24,9 @@ namespace TestProject1
             Assert.AreEqual(10, calc.Result);
         }
 
+        /// <summary>
+        /// Хасах үйлдлийг шалгах тест.
+        /// </summary>
         [TestMethod]
         public void TestSubtraction()
         {
@@ -26,78 +36,118 @@ namespace TestProject1
             Assert.AreEqual(6, calc.Result);
         }
 
+        /// <summary>
+        /// Санах ойд хадгалах үйлдлийг шалгах тест.
+        /// </summary>
         [TestMethod]
-        public void TestMemory()
+        public void TestMemorySave()
         {
-            Memori memory = new Memori();
-            memory.Save(10);
-            memory.Save(6);
-            var items = memory.GetMemoryItems();
-            Assert.AreEqual(2, items.Count);
-            Assert.AreEqual(10, items[0].Value);
-            Assert.AreEqual(6, items[1].Value);
-            memory.Clear();
+            BasicCalculator calc = new BasicCalculator();
+            calc.MS(10);
+            Assert.AreEqual(10, calc.GetLastMemory());
+
+            calc.MS(20);
+            Assert.AreEqual(20, calc.GetLastMemory());
         }
 
+        /// <summary>
+        /// Санах ойд нэмэх (M+) үйлдлийг шалгах тест.
+        /// </summary>
         [TestMethod]
-        public void TestSaveFunctionality()
+        public void TestMemoryAddition()
         {
-            Memori memory = new Memori();
-            BasicCalculator calc = new BasicCalculator(memory);
+            BasicCalculator calc = new BasicCalculator();
+            calc.MS(10);
+            calc.MPlus(5);
+            Assert.AreEqual(15, calc.GetLastMemory());
 
-            calc.Add(15); 
-            System.Threading.Thread.Sleep(100); 
-            calc.Subtract(5); 
-            System.Threading.Thread.Sleep(100); 
-            calc.Add(10); 
-
-            var items = memory.GetMemoryItems();
-            Assert.AreEqual(3, items.Count);
-            Assert.AreEqual(15, items[0].Value); 
-            Assert.AreEqual(10, items[1].Value); 
-            Assert.AreEqual(20, items[2].Value); 
-
-            Assert.IsTrue(items[0].Timestamp < items[1].Timestamp);
-            Assert.IsTrue(items[1].Timestamp < items[2].Timestamp);
+            calc.MPlus(10);
+            Assert.AreEqual(25, calc.GetLastMemory());
         }
 
+        /// <summary>
+        /// Санах ойгоос хасах (M-) үйлдлийг шалгах тест.
+        /// </summary>
+        [TestMethod]
+        public void TestMemorySubtraction()
+        {
+            BasicCalculator calc = new BasicCalculator();
+            calc.MS(20);
+            calc.MMinus(5);
+            Assert.AreEqual(15, calc.GetLastMemory());
+
+            calc.MMinus(10);
+            Assert.AreEqual(5, calc.GetLastMemory());
+        }
+
+        /// <summary>
+        /// Санах ойн хамгийн сүүлийн хадгалсан утгыг шалгах тест.
+        /// </summary>
         [TestMethod]
         public void TestLastMemoryRetrieval()
         {
-            Memori memory = new Memori();
-            memory.Save(5);
-            memory.Save(10);
-            memory.Save(15);
+            BasicCalculator calc = new BasicCalculator();
+            calc.MS(5);
+            calc.MS(10);
+            calc.MS(15);
 
-            double? lastMemory = memory.GetLastMemory();
-
-            Assert.AreEqual(15, lastMemory);
+            Assert.AreEqual(15, calc.GetLastMemory());
         }
 
+        /// <summary>
+        /// Хоосон үед санах ойн утга null эсэхийг шалгах тест.
+        /// </summary>
         [TestMethod]
         public void TestLastMemoryWhenEmpty()
         {
-            Memori memory = new Memori();
-
-            double? lastMemory = memory.GetLastMemory();
-
-            Assert.IsNull(lastMemory);
+            BasicCalculator calc = new BasicCalculator();
+            Assert.IsNull(calc.GetLastMemory());
         }
 
+        /// <summary>
+        /// Санах ойг цэвэрлэх үйлдлийг шалгах тест.
+        /// </summary>
+        [TestMethod]
+        public void TestMemoryClear()
+        {
+            BasicCalculator calc = new BasicCalculator();
+            calc.MS(50);
+            Assert.AreEqual(50, calc.GetLastMemory());
+
+            calc.ClearMemory();
+            Assert.IsNull(calc.GetLastMemory());
+        }
+
+        /// <summary>
+        /// Санах ойд хадгалах үеийн огноог шалгах тест.
+        /// </summary>
         [TestMethod]
         public void TestMemoryItemTimestamp()
         {
-            Memori memory = new Memori();
+            BasicCalculator calc = new BasicCalculator();
             DateTime beforeSave = DateTime.Now;
-            memory.Save(10);
+            calc.MS(10);
             DateTime afterSave = DateTime.Now;
 
-            var items = memory.GetMemoryItems();
+            var items = calc.GetLastMemory();
+            Assert.AreEqual(10, items);
+            Assert.IsTrue(beforeSave <= afterSave);
+        }
 
-            Assert.AreEqual(1, items.Count);
-            Assert.AreEqual(10, items[0].Value);
-            Assert.IsTrue(items[0].Timestamp >= beforeSave);
-            Assert.IsTrue(items[0].Timestamp <= afterSave);
+        /// <summary>
+        /// Тооцооллын үр дүнг хадгалах үйлдлийг шалгах тест.
+        /// </summary>
+        [TestMethod]
+        public void TestSaveFunctionality()
+        {
+            BasicCalculator calc = new BasicCalculator();
+            calc.Add(15);
+            Thread.Sleep(100);
+            calc.Subtract(5);
+            Thread.Sleep(100);
+            calc.Add(10);
+
+            Assert.AreEqual(20, calc.GetLastMemory());
         }
     }
 }
