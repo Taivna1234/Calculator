@@ -13,34 +13,23 @@ namespace Calculator.Memory
     public class MemoryItem
     {
         // Утга (Value) нь санах ойн тухайн зүйлсийн утга
-        public double Value { get; private set; }
+        public double Value { get;  set; }
+        public int ID { get; set; }
 
         // Тохиромжтой цаг хугацаа (Timestamp) нь санах ойн зүйлсийг хадгалахын цагийг зааж байна
-        public DateTime Timestamp { get; }
+        private static int _idCounter = 1;
 
         // Конструктор: Санах ойн зүйлсийг үүсгэхдээ утга авах бөгөөд
         // цаг хугацааг автоматаар олгоно
         public MemoryItem(double value)
         {
             Value = value;
-            Timestamp = DateTime.Now; // Одоо цагийг авах
+            ID = _idCounter++;
         }
 
         // MPlus: Санах ойн эцсийн утга болон шинэ утгыг нэмэх үйлдэл
         // `number` нь нэмэгдэх утга бөгөөд `lastMemory` нь өмнөх санах ойн зүйлс
-        public static MemoryItem MPlus(double number, MemoryItem lastMemory)
-        {
-            double lastValue = lastMemory?.Value ?? 0; // Хэрэв өмнөх санах ойн зүйл байхгүй бол 0 утгыг авна
-            return new MemoryItem(lastValue + number); // Шинэ санах ойн зүйл үүсгэж, утгыг нэмнэ
-        }
-
-        // MMinus: Санах ойн эцсийн утга болон шинэ утгыг хасах үйлдэл
-        // `number` нь хасагдах утга бөгөөд `lastMemory` нь өмнөх санах ойн зүйлс
-        public static MemoryItem MMinus(double number, MemoryItem lastMemory)
-        {
-            double lastValue = lastMemory?.Value ?? 0; // Хэрэв өмнөх санах ойн зүйл байхгүй бол 0 утгыг авна
-            return new MemoryItem(lastValue - number); // Шинэ санах ойн зүйл үүсгэж, утгыг хасна
-        }
+        
     }
 }
 

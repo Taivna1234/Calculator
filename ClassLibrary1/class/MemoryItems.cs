@@ -15,13 +15,17 @@ namespace Calculator.Memory
     public class Memori
     {
         // Санах ойн зүйлсийн жагсаалт (memoryItems)
-        private List<MemoryItem> memoryItems = new List<MemoryItem>();
+        public List<MemoryItem> memoryItems = new List<MemoryItem>();
 
         // Save: Шинэ санах ойн зүйлсийг хадгалах
         // `item` нь санах ойн шинэ зүйл бөгөөд үүнийг жагсаалтад нэмнэ
         public void Save(MemoryItem item)
         {
             memoryItems.Add(item);
+        }
+        public MemoryItem GetMemoryItemById(int id)
+        {
+            return memoryItems.FirstOrDefault(item => item.ID == id);
         }
 
         // GetLastMemory: Санах ойн хамгийн сүүлийн зүйлсийг авах
@@ -33,24 +37,36 @@ namespace Calculator.Memory
 
         // MPlus: Санах ойн хамгийн сүүлийн зүйлсэд тодорхой утга нэмэх
         // `number` нь нэмэгдэх утга бөгөөд сүүлийн санах ойн зүйлд нэмэгдэх болно
-        public void MPlus(double number)
+        public void MPlus(double number, int id)
         {
-            MemoryItem lastMemory = GetLastMemory();
-            Save(MemoryItem.MPlus(number, lastMemory)); // Шинэ санах ойн зүйлс үүсгэн хадгална
+            var memoryItem = GetMemoryItemById(id);
+            if (memoryItem != null)
+            {
+                memoryItem.Value += number;
+            }
         }
 
-        // MMinus: Санах ойн хамгийн сүүлийн зүйлсээс тодорхой утга хасах
-        // `number` нь хасагдах утга бөгөөд сүүлийн санах ойн зүйлсээс хасагдах болно
-        public void MMinus(double number)
+        public void MMinus(double number, int id)
         {
-            MemoryItem lastMemory = GetLastMemory();
-            Save(MemoryItem.MMinus(number, lastMemory)); // Шинэ санах ойн зүйлс үүсгэн хадгална
+            var memoryItem = GetMemoryItemById(id);
+            if (memoryItem != null)
+            {
+                memoryItem.Value -= number;
+            }
         }
 
         // Clear: Бүх санах ойн зүйлсийг цэвэрлэх
         public void Clear()
         {
             memoryItems.Clear(); // Санах ойн жагсаалтыг цэвэрлэх
+        }
+        public List<MemoryItem> GetMemoryItems()
+        {
+            return memoryItems;
+        }
+        public List<double> GetMemoryValues()
+        {
+            return memoryItems.Select(item => item.Value).ToList();
         }
     }
 }

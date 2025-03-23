@@ -61,6 +61,7 @@ namespace Calculator
         /// <param name="number">Хадгалах тоо.</param>
         public void MS(double number)
         {
+            var memoryItem = new MemoryItem(number);
             memory.Save(new MemoryItem(number));
         }
 
@@ -68,19 +69,17 @@ namespace Calculator
         /// Санах ойн сүүлийн утганд тоог нэмэх үйлдэл.
         /// </summary>
         /// <param name="number">Нэмэх тоо.</param>
-        public void MPlus(double number)
+        public void MPlus(double number, int ID)
         {
-            memory.MPlus(number);
+            memory.MPlus(number, ID); 
         }
 
-        /// <summary>
-        /// Санах ойн сүүлийн утгаас тоог хасах үйлдэл.
-        /// </summary>
-        /// <param name="number">Хасах тоо.</param>
-        public void MMinus(double number)
+        // Use the version with two parameters
+        public void MMinus(double number, int ID)
         {
-            memory.MMinus(number);
+            memory.MMinus(number, ID); 
         }
+
 
         /// <summary>
         /// Санах ойн хамгийн сүүлийн утгыг авах функц.
@@ -89,6 +88,16 @@ namespace Calculator
         public double? GetLastMemory()
         {
             return memory.GetLastMemory()?.Value;
+        }
+        public List<MemoryItem> GetMemoryItems()
+        {
+            return memory.GetMemoryItems();
+        }
+        public void UpdateMemoryItem(double updatedValue)
+        {
+            // Get the last memory item and update its value
+            var lastMemoryItem = memory.GetLastMemory();
+            lastMemoryItem.Value = updatedValue; // Update the memory value
         }
 
         /// <summary>

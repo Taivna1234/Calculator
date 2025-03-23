@@ -30,10 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             lblDisplay = new Label();
-            grpMemory = new GroupBox();
-            lblMemoryLast = new Label();
-            btnMemoryAdd = new Button();
-            btnMemorySubstract = new Button();
             btn0 = new Button();
             btn1 = new Button();
             btn2 = new Button();
@@ -60,7 +56,7 @@
             Name1 = new Button();
             titlebtn = new Button();
             removebtn = new Button();
-            grpMemory.SuspendLayout();
+            panelMemoryContainer = new Panel();
             contextMenuStrip3.SuspendLayout();
             SuspendLayout();
             // 
@@ -73,53 +69,6 @@
             lblDisplay.Size = new Size(0, 37);
             lblDisplay.TabIndex = 0;
             lblDisplay.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // grpMemory
-            // 
-            grpMemory.BackColor = Color.Azure;
-            grpMemory.Controls.Add(lblMemoryLast);
-            grpMemory.Controls.Add(btnMemoryAdd);
-            grpMemory.Controls.Add(btnMemorySubstract);
-            grpMemory.Font = new Font("Segoe UI", 9F);
-            grpMemory.Location = new Point(486, 38);
-            grpMemory.Name = "grpMemory";
-            grpMemory.Size = new Size(290, 128);
-            grpMemory.TabIndex = 1;
-            grpMemory.TabStop = false;
-            grpMemory.Enter += grpMemory_Enter;
-            // 
-            // lblMemoryLast
-            // 
-            lblMemoryLast.AutoSize = true;
-            lblMemoryLast.Font = new Font("Segoe UI", 15F);
-            lblMemoryLast.Location = new Point(6, 68);
-            lblMemoryLast.Name = "lblMemoryLast";
-            lblMemoryLast.Size = new Size(23, 28);
-            lblMemoryLast.TabIndex = 18;
-            lblMemoryLast.Text = "0";
-            // 
-            // btnMemoryAdd
-            // 
-            btnMemoryAdd.BackColor = Color.Transparent;
-            btnMemoryAdd.ForeColor = Color.Black;
-            btnMemoryAdd.Location = new Point(83, 99);
-            btnMemoryAdd.Name = "btnMemoryAdd";
-            btnMemoryAdd.Size = new Size(75, 23);
-            btnMemoryAdd.TabIndex = 16;
-            btnMemoryAdd.Text = "M+";
-            btnMemoryAdd.UseVisualStyleBackColor = false;
-            btnMemoryAdd.Click += btnMemoryAdd_Click;
-            // 
-            // btnMemorySubstract
-            // 
-            btnMemorySubstract.BackColor = Color.Transparent;
-            btnMemorySubstract.Location = new Point(0, 99);
-            btnMemorySubstract.Name = "btnMemorySubstract";
-            btnMemorySubstract.Size = new Size(75, 23);
-            btnMemorySubstract.TabIndex = 17;
-            btnMemorySubstract.Text = "M-";
-            btnMemorySubstract.UseVisualStyleBackColor = false;
-            btnMemorySubstract.Click += btnMemorySubtract_Click;
             // 
             // btn0
             // 
@@ -299,9 +248,9 @@
             // 
             // button3
             // 
-            button3.Location = new Point(19, 414);
+            button3.Location = new Point(19, 411);
             button3.Name = "button3";
-            button3.Size = new Size(92, 37);
+            button3.Size = new Size(92, 40);
             button3.TabIndex = 19;
             button3.Text = "+/-";
             button3.UseVisualStyleBackColor = true;
@@ -342,16 +291,16 @@
             titlebtn.FlatAppearance.BorderSize = 0;
             titlebtn.FlatStyle = FlatStyle.Flat;
             titlebtn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            titlebtn.Location = new Point(486, 12);
+            titlebtn.Location = new Point(522, 12);
             titlebtn.Name = "titlebtn";
             titlebtn.Size = new Size(75, 23);
             titlebtn.TabIndex = 21;
             titlebtn.Text = "Memory";
             titlebtn.UseVisualStyleBackColor = true;
-            titlebtn.Click += button4_Click;
             // 
             // removebtn
             // 
+            removebtn.Font = new Font("Segoe UI", 11F);
             removebtn.Location = new Point(298, 230);
             removebtn.Name = "removebtn";
             removebtn.Size = new Size(92, 40);
@@ -360,12 +309,21 @@
             removebtn.UseVisualStyleBackColor = true;
             removebtn.Click += Remove;
             // 
+            // panelMemoryContainer
+            // 
+            panelMemoryContainer.AutoScroll = true;
+            panelMemoryContainer.Location = new Point(522, 41);
+            panelMemoryContainer.Name = "panelMemoryContainer";
+            panelMemoryContainer.Size = new Size(200, 397);
+            panelMemoryContainer.TabIndex = 23;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightCyan;
             ClientSize = new Size(808, 450);
+            Controls.Add(panelMemoryContainer);
             Controls.Add(removebtn);
             Controls.Add(titlebtn);
             Controls.Add(Name1);
@@ -387,13 +345,10 @@
             Controls.Add(btn2);
             Controls.Add(btn1);
             Controls.Add(btn0);
-            Controls.Add(grpMemory);
             Controls.Add(lblDisplay);
             Name = "Form1";
             Text = "Calculator";
             Load += Form1_Load;
-            grpMemory.ResumeLayout(false);
-            grpMemory.PerformLayout();
             contextMenuStrip3.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -402,7 +357,6 @@
         #endregion
 
         private Label lblDisplay;
-        private GroupBox grpMemory;
         private Button btn0;
         private Button btn1;
         private Button btn2;
@@ -417,10 +371,7 @@
         private Button btnSubstract;
         private Button btnEquals;
         private Button btnClear;
-        private Button btnMemoryAdd;
-        private Button btnMemorySubstract;
         private Button btnMemorySave;
-        private Label lblMemoryLast;
         private Button button1;
         private ContextMenuStrip contextMenuStrip1;
         private Button button2;
@@ -432,5 +383,6 @@
         private Button Name1;
         private Button titlebtn;
         private Button removebtn;
+        private Panel panelMemoryContainer;
     }
 }
